@@ -1,0 +1,13 @@
+const BASE_URL="http://localhost:5000";
+export const FOODS_URL = BASE_URL + '/api/food';
+export const FOODS_TAGS_URL = FOODS_URL + '/tags';
+export const FOODS_BY_SEARCH_URL = FOODS_URL + '/search/';
+export const FOODS_BY_TAG_URL = FOODS_URL + '/tags/';
+export const FOOD_BY_ID_URL = FOODS_URL + '/';
+export const User_login_URL =  BASE_URL +'/api/users/login'
+export const USER_Register_URL=BASE_URL+'/api/users/register'
+export const Order_Url=BASE_URL+'/api/orders'
+export const Order_Create_Url=Order_Url+'/create'
+export const Order_New_for_user=Order_Url+'/newOrderfromcurrentuser'
+export const Order_Pay_Url=Order_Url+'/pay'
+export const Order_Track_Url=Order_Url+'/track/'

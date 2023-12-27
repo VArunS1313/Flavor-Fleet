@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Bitter&family=Poppins&display=swap');
+@import 'ngx-toastr/toastr';
+html{
+    font-family: 'Bitter', serif;
+
+}
+html,button{
+    font-family: 'Poppins', sans-serif;
+}

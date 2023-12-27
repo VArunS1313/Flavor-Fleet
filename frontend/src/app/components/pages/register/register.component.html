@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="details">
+        <app-title title="Register"></app-title>
+      <form [formGroup]="registerForm" (ngSubmit)="submit()" class="registerForm">
+        <div class="containerlabe input-container">
+          <label>Name</label>
+          <div class="content">
+            <input type="text" placeholder="abc" formControlName="name" class="form-control">
+          
+          <div class="input-validation error-list " *ngIf="fc['name'].errors && isSubmitted">
+            <div *ngIf="fc['name'].errors['required']">Should Not be empty</div>
+            <div *ngIf="fc['name'].errors['minlength']">User name is too short  </div>
+        </div>
+          </div>
+        </div>
+        <div class="containerlabe input-container">
+          <label>Email</label>
+          <div class="content">
+            <input type="text" placeholder="abc" formControlName="email" />
+          
+          <div class="input-validation error-list" *ngIf="fc['email'].errors && isSubmitted">
+            <div *ngIf="fc['email'].errors['required']">Should Not be empty</div>
+            <div *ngIf="fc['email'].errors['email']">Wrong email</div>
+          </div>
+        </div>
+        </div>
+        <div class="containerlabe input-container">
+            <label>Address</label>
+            <div class="content">
+              <input type="text" placeholder="abc" formControlName="address" class="form-control">
+            
+            <div class="input-validation error-list " *ngIf="fc['address'].errors && isSubmitted">
+              <div *ngIf="fc['address'].errors['required']">Should Not be empty</div>
+              <div *ngIf="fc['address'].errors['minlength']">User name is too short  </div>
+          </div>
+            </div>
+          </div>
+        <div class="containerlabe input-container">
+            <label>Password</label>
+            <div class="content">
+              <input type="password" placeholder="*****" formControlName="password">
+            
+            <div class="input-validation error-list" *ngIf="fc['password'].errors && isSubmitted">
+              <div *ngIf="fc['password'].errors['required']">Should Not be empty</div>
+              <div *ngIf="fc['password'].errors['minlength']">Password is too short </div>
+              
+            </div>
+        </div>
+          </div>
+          <div class="containerlabe input-container">
+            <label>Confirm Password</label>
+            <div class="content">
+              <input type="password" placeholder="*****" formControlName="confirmPassword">
+            
+            <div class="input-validation error-list" *ngIf="fc['confirmPassword'].errors && isSubmitted">
+              <div *ngIf="fc['confirmPassword'].errors['required']">Should Not be empty</div>
+              <div *ngIf="fc['confirmPassword'].errors['confirmedValidator']">Password Does not match</div>
+              
+            </div>
+          </div>
+          </div>
+          <app-default-button text="Register" >
+
+          </app-default-button>
+          <div class="login">
+            Already a user? &nbsp;
+            <a routerLink="/login" [queryParams]="{returnUrl: routerurl}">
+              Login Here
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>

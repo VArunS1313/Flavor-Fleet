@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="content">
+      <app-title title="Order Form" fontSize="1.6rem"></app-title>
+      <form [formGroup]="checkoutForm">
+        <div class="containerlabe input-container">
+            <label>Name</label>
+            <div class="contentt">
+              <input type="text" placeholder="abc" formControlName="name" class="form-control">
+              <div class="input-validation error-list " *ngIf="fc['name'].errors">
+                <div *ngIf="fc['name'].errors['required']">Should Not be empty</div>
+               
+            </div>
+              </div>
+        </div>
+        <div class="containerlabe input-container">
+            <label>Address</label>
+            <div class="contentt">
+              <input type="text" placeholder="abc" formControlName="address" class="form-control">
+              <div class="input-validation error-list " *ngIf="fc['address'].errors ">
+                <div *ngIf="fc['address'].errors['required']">Should Not be empty</div>
+               
+            </div>
+              </div>
+        </div>
+
+    
+      </form>
+      <orderlist [order]="order"> </orderlist>
+      </div>
+      <div class="map">
+        <app-title
+        title="Choose Your Address On Map"
+        fontSize="1.6rem"></app-title>
+         <map [order]="order"></map> 
+      </div>
+      <div class="buttons-container">
+        <div class="buttons">
+          <button (click)="checkoutorder()">
+            Go To Payment
+          </button>
+        </div>
+      </div>
+      </div>
