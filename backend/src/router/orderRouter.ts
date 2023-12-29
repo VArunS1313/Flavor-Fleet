@@ -3,6 +3,7 @@ import asyncHandler from 'express-async-handler'
 import { OrderModel } from "../models/order.model";
 import { Order_status } from "../enum/order_status";
 import auth_midd from "../middlewhere/auth_midd";
+import { UserModel } from "../models/user.model";
 
 
 const router=Router();
@@ -38,6 +39,9 @@ router.get('/track/:id',asyncHandler(async(req,res)=>{
 router.post('/pay',asyncHandler(async(req,res)=>{
     const {paymentId}=req.body
     const neworder=await getnewOrderforcuruser(req)
+    console.log(neworder)
+   // const user=await UserModel.findById(neworder?.user)
+   //send req to dif rent controller for send mail
     if(!neworder)
     {
         res.status(400).send('Order Not Found')

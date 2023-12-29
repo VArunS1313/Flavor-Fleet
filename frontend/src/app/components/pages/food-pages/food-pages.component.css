@@ -4,6 +4,7 @@
     align-items: center;
     flex-wrap: wrap;
     margin: 3rem;
+    transform: scale(0.8);
   }
   
   .container > *{
