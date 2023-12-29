@@ -1,23 +1,39 @@
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-
+   
     host: 'smtp.ethereal.email',
+    //host: 'smtp.gmail.email',
     port: 587,
     auth: {
-        user: 'audra70@ethereal.email',
-        pass: 'Af8HdgGfMFjfcsBmSG'
+        user: process.env.EMAIL_test,
+        pass: process.env.EMAIL_password_test
     },
   });
-  export default async function sendEmail() {
+  export default async function sendEmail(order:any,user:any) {
     try{
+      console.log(user)
+      const fromName = "Flavor Fleet 👩‍🍳";
+const fromEmail = process.env.EMAIL_test;
+const from = `"${fromName}" <${fromEmail}>`;
+console.log(from+"  "+process.env.EMAIL_password_test);
+      const orderItemsHTML = order.items.map((item: any) => `
+            <li>
+                <strong>Name:</strong> ${item.name}<br>
+                <strong>Price:</strong> ${item.price}<br>
+                <strong>Quantity:</strong> ${item.quantity}
+            </li>
+        `).join('');
     // send mail with defined transport object
     const info = await transporter.sendMail({
-      from: '"Flavor Fleet 👩‍🍳" <flaverfleet@example.com>', // sender address
-      to: "vs1313046@gmail.com", // list of receivers
-      subject: "Hello ✔", // Subject line
+      from: from, // sender address
+      to: user.email, // list of receivers
+      subject: "Order Detail", // Subject line
       text: "Hello world?", // plain text body
-      html: "<b>Hello world?<button>How ?<button></b>", // html body
+      html: ` <p>Hello ${user.name},</p>
+      <p>Your order details:</p>
+      <ul>${orderItemsHTML}</ul>
+      <p><strong>Total Price:</strong> ${order.totalPrice}</p>`, // html body
     });
   
     console.log("Message sent: %s", info.messageId);

@@ -5,6 +5,7 @@ import { Order_status } from "../enum/order_status";
 import auth_midd from "../middlewhere/auth_midd";
 import { UserModel } from "../models/user.model";
 
+import  sendEmail from './emailservice';
 
 const router=Router();
 router.use(auth_midd)
@@ -33,13 +34,16 @@ router.get('/newOrderfromcurrentuser',asyncHandler(async(req:any,res)=>{
 }))
 router.get('/track/:id',asyncHandler(async(req,res)=>{
     const order=await OrderModel.findById(req.params.id);
+    
     res.send(order)
 
 }))
 router.post('/pay',asyncHandler(async(req,res)=>{
     const {paymentId}=req.body
     const neworder=await getnewOrderforcuruser(req)
+    const user= neworder?.user
     console.log(neworder)
+  
    // const user=await UserModel.findById(neworder?.user)
    //send req to dif rent controller for send mail
     if(!neworder)
@@ -47,6 +51,13 @@ router.post('/pay',asyncHandler(async(req,res)=>{
         res.status(400).send('Order Not Found')
         return
     }
+    sendEmail(neworder,user)
+    .then(() => {
+      console.log('Email sent successfully.');
+    })
+    .catch((error) => {
+      console.error('Error sending email:', error);
+    });
     neworder.paymentId=paymentId;
     neworder.status=Order_status.PAYED;
     await neworder.save()

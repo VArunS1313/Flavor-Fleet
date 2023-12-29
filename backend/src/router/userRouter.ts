@@ -4,8 +4,8 @@ import { sample_users } from '../data';
 import asyncHandler from 'express-async-handler'
 import bycrypt from 'bcryptjs'
 import { User, UserModel } from '../models/user.model';
+import  sendEmail from './emailservice';
 
-import  sendEmail  from './emailservice';
 
 const router=Router();
 
@@ -26,16 +26,11 @@ router.post('/login',asyncHandler(async (req,res)=>{
     const {email,password}=req.body;  //// destructure of body
     
     const user = await UserModel.findOne({email});
+    const neworder={}
     
     if(user&&(await bycrypt.compare(password,user.password)))
     {
-        sendEmail()
-        .then(() => {
-          console.log('Email sent successfully.');
-        })
-        .catch((error) => {
-          console.error('Error sending email:', error);
-        });
+       
         res.send(genratewbtoken(user));
     }
     else{
